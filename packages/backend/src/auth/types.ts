@@ -5,5 +5,6 @@ export type LoginDTO = {
 };
 
 export type LoginResponse = {
+  user? : {[k: string]: any}
   token?: string;
 };

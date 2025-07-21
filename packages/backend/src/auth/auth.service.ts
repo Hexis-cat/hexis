@@ -1,6 +1,9 @@
 import { HttpStatusCode } from "axios";
 import dayjs from "dayjs";
 import { HTTPException } from "hono/http-exception";
+import jwt from "jsonwebtoken";
+import { createPublicClient, http } from 'viem';
+import { mainnet } from 'viem/chains';
 import { LoginDTO, LoginResponse } from "./types";
 
 export const AuthService = {
@@ -23,7 +26,6 @@ export const AuthService = {
     }
 
 
-    // TODO : 시그니처 검증
     const isSignatureValid = await this.verifySignature({address, nonce, signature});
     if (!isSignatureValid) {
       throw new HTTPException(HttpStatusCode.BadRequest, {
@@ -31,23 +33,29 @@ export const AuthService = {
       });
     }
 
-    // TODO : get User
+    // TODO : get or Create User
     
-    // JWT 토큰 생성 (실제 구현에서는 더 안전한 방법 사용)
-    const accessToken = this.generateJWT(address);
-
     return {
-      token: accessToken,
-    };
+      user : {},
+      token : this.generateAccessToken(address, "secret"),
+    } 
   },
 
-  /**
-   * 간단한 JWT 토큰 생성 (실제 프로덕션에서는 더 안전한 방법 사용)
-   */
-  generateJWT(address: string): string {
-    return "token";
+  
+  generateAccessToken(address: string, secret : string): string {
+    return jwt.sign({ address }, secret, { expiresIn: '7d' });
   },
+
   async verifySignature({address, nonce, signature}: {address: string, nonce: string, signature: string}): Promise<boolean> {
-    return true;
+    const publicClient = createPublicClient({
+      chain: mainnet,
+      transport: http(),
+    })
+
+   return await publicClient.verifyMessage({
+      address: address as `0x${string}`,
+      message: nonce,
+      signature: signature as `0x${string}`,
+    })
   },
 };
