@@ -5,7 +5,7 @@ export const AuthRouter = new Hono().basePath("/auth");
 
 // Nonce 생성 엔드포인트
 AuthRouter.get("/nonce", (c) => {
-  const nonce = AuthService.getNonce();
+  const nonce = AuthService.generateNonce();
   return c.json({ nonce });
 });
 

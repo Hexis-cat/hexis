@@ -7,7 +7,13 @@ import { mainnet } from 'viem/chains';
 import { LoginDTO, LoginResponse } from "./types";
 
 export const AuthService = {
-  getNonce(): string {
+  async generateNonce(): Promise<string> {
+    // TODO : save nonce to db or cache
+    return crypto.randomUUID();
+  },
+
+  async getNonce(address : string) : Promise<string> {
+    // TODO : get nonce from db or cache
     return crypto.randomUUID();
   },
 
