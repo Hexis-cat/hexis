@@ -19,7 +19,7 @@ AuthRouter.post('/login', async (c : Context) => {
     if (!nonce || !signature || !address) {
       return c.json({
         success: false,
-        error: "Missing required fields: nonce, signature, timestamp, address"
+        error: "Missing required fields: nonce, signature, address"
       }, 400);
     }
 
