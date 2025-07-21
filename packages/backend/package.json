@@ -9,9 +9,11 @@
   "dependencies": {
     "axios": "^1.10.0",
     "dayjs": "^1.11.13",
-    "hono": "^4.7.11"
+    "hono": "^4.7.11",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "wrangler": "^4.4.0"
   }
 }
