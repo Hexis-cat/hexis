@@ -34,3 +34,5 @@ docker-compose
 
 # misc
 .DS_Store
+
+/src/generated/prisma

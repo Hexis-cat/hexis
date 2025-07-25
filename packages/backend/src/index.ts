@@ -5,6 +5,7 @@ import { AuthRouter } from "./auth/auth.router";
 
 export type Bindings = {
   ENVIRONMENT: string;
+  DB : D1Database
 };
 
 const app = new Hono<{
