@@ -1,12 +1,12 @@
 import { Context, Hono } from "hono";
 import { AuthService } from "./auth.service";
 
-export const AuthRouter = new Hono().basePath("/auth");
+export const AuthRouter = new Hono().basePath("");
 
 // Nonce 생성 엔드포인트
-AuthRouter.get("/nonce", (c) => {
-  const nonce = AuthService.generateNonce();
-  return c.json({ nonce });
+AuthRouter.get("/nonce", async (c) => {
+  const nonce = await AuthService.generateNonce(c, "0x124");
+  return c.json(nonce);
 });
 
 // 로그인 및 시그니처 검증 엔드포인트
@@ -24,7 +24,7 @@ AuthRouter.post('/login', async (c : Context) => {
     }
 
     // 시그니처 검증 및 로그인 처리
-    const result = await AuthService.login({
+    const result = await AuthService.login(c, {
       nonce,
       signature,
       address

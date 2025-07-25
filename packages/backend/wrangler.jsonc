@@ -18,13 +18,13 @@
   //     "bucket_name": "my-bucket"
   //   }
   // ],
-  // "d1_databases": [
-  //   {
-  //     "binding": "MY_DB",
-  //     "database_name": "my-database",
-  //     "database_id": ""
-  //   }
-  // ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "hexis-db",
+      "database_id": "local-hexis-db"
+    }
+  ],
   // "ai": {
   //   "binding": "AI"
   // },

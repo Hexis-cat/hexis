@@ -1,3 +1,5 @@
+import { User } from "../lib/schema";
+
 export type LoginDTO = {
   nonce: string;
   signature: string;
@@ -5,6 +7,6 @@ export type LoginDTO = {
 };
 
 export type LoginResponse = {
-  user? : {[k: string]: any}
-  token?: string;
+  user : User 
+  token : string;
 };
