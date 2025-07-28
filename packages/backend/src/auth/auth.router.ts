@@ -1,11 +1,20 @@
+import { HttpStatusCode } from "axios";
 import { Context, Hono } from "hono";
+import { HTTPException } from "hono/http-exception";
 import { AuthService } from "./auth.service";
 
 export const AuthRouter = new Hono().basePath("");
 
 // Nonce 생성 엔드포인트
 AuthRouter.get("/nonce", async (c) => {
-  const nonce = await AuthService.generateNonce(c, "0x124");
+  const address = c.req.query("address");
+  if (!address) {
+    throw new HTTPException(HttpStatusCode.BadRequest, {
+      message: "Missing required fields: address",
+    });
+  }
+
+  const nonce = await AuthService.generateNonce(c, address);
   return c.json(nonce);
 });
 
