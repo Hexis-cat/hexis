@@ -11,7 +11,7 @@ function runWranglerQuery(sql) {
   const tmpFile = path.join(os.tmpdir(), `migration-${Date.now()}.sql`);
   fs.writeFileSync(tmpFile, sql);
 
-  const cmd = `npx wrangler d1 execute hexis-db ${remoteFlag} --command="${sql}" --json=true`;
+  const cmd = `npx wrangler d1 execute hexis-db ${remoteFlag} --file=${tmpFile} --json=true`;
   const raw = execSync(cmd, { encoding: "utf-8" });
   fs.unlinkSync(tmpFile);
 
@@ -89,6 +89,9 @@ function runMigrations() {
     }
 
     let sql = fs.readFileSync(sqlFile, "utf-8");
+
+    // SQL 주석 제거 (-- 로 시작하는 라인)
+    sql = sql.replace(/^\s*--.*$/gm, "");
 
     // prisma_migrations 테이블 생성 구문 제거
     sql = sql.replace(/CREATE TABLE "prisma_migrations"[\s\S]*?;\n\n/g, "");
