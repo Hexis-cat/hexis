@@ -6,6 +6,7 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "account_id": "9e405c909176b2cab4c5a773ac033506",
   // "kv_namespaces": [
   //   {
   //     "binding": "MY_KV_NAMESPACE",
@@ -22,7 +23,7 @@
     {
       "binding": "DB",
       "database_name": "hexis-db",
-      "database_id": "local-hexis-db"
+      "database_id": "9699d3e2-b81e-46f1-81a0-37aba1d388f1"
     }
   ],
   // "ai": {

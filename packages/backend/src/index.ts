@@ -4,6 +4,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { AuthRouter } from "./auth/auth.router";
+import { createPrismaClient } from "./lib/prisma";
 
 // dayjs 확장 플러그인 설정 (UTC 타임존 사용)
 dayjs.extend(utc);
@@ -25,8 +26,10 @@ app.use(logger());
 
 app.use("*", cors());
 
-app.get("/", (c) => {
-  return c.json({ message: "Hello Hono!" });
+app.get("/", async (c) => {
+  const prisma = createPrismaClient(c.env.DB);
+  const users = await prisma.user.findMany();
+  return c.json({ users });
 });
 
 app.get("/health", (c) => {
