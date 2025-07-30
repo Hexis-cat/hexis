@@ -8,7 +8,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "db:gen": "prisma generate",
     "db:migrate": "prisma migrate dev && node scripts/migration.js dev",
-    "db:migrate:prod": "prisma migrate dev && node scripts/migration.js prod"
+    "db:migrate:prod": "node scripts/migration.js prod"
   },
   "dependencies": {
     "@prisma/adapter-d1": "^6.12.0",
