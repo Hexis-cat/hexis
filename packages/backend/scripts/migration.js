@@ -11,7 +11,7 @@ function runWranglerQuery(sql) {
   const tmpFile = path.join(os.tmpdir(), `migration-${Date.now()}.sql`);
   fs.writeFileSync(tmpFile, sql);
 
-  const cmd = `npx wrangler d1 execute hexis-db ${remoteFlag} --json --file=${tmpFile}`;
+  const cmd = `npx wrangler d1 execute hexis-db ${remoteFlag} --command="${sql}" --json=true`;
   const raw = execSync(cmd, { encoding: "utf-8" });
   fs.unlinkSync(tmpFile);
 
@@ -52,11 +52,10 @@ function markMigrationAsApplied(name) {
 /** 적용된 마이그레이션 목록 조회 */
 function getAppliedMigrations() {
   const res = runWranglerQuery('SELECT name as "migration_name" FROM prisma_migrations ORDER BY registeredAt;');
-  console.log(res[0])
   if (!Array.isArray(res) || !res[0] || !Array.isArray(res[0].results)) return [];
 
   const migrations = res[0].results
-    .map(row => row.name)
+    .map(row => row.migration_name)
     .filter(Boolean);
 
   return migrations;
@@ -73,43 +72,43 @@ function runMigrations() {
     .sort();
 
   const applied = getAppliedMigrations();
-  // const pending = allMigrations.filter(m => !applied.includes(m));
+  const pending = allMigrations.filter(m => !applied.includes(m));
 
-  // if (pending.length === 0) {
-  //   console.log("[migration] No new migrations to apply.");
-  //   return;
-  // }
+  if (pending.length === 0) {
+    console.log("[migration] No new migrations to apply.");
+    return;
+  }
 
-  // console.log(`[migration] Applying ${pending.length} migration(s): ${pending.join(", ")}`);
+  console.log(`[migration] Applying ${pending.length} migration(s): ${pending.join(", ")}`);
 
-  // for (const migration of pending) {
-  //   const sqlFile = path.join(migrationsDir, migration, "migration.sql");
-  //   if (!fs.existsSync(sqlFile)) {
-  //     console.warn(`[migration] Skipping ${migration}: migration.sql not found`);
-  //     continue;
-  //   }
+  for (const migration of pending) {
+    const sqlFile = path.join(migrationsDir, migration, "migration.sql");
+    if (!fs.existsSync(sqlFile)) {
+      console.warn(`[migration] Skipping ${migration}: migration.sql not found`);
+      continue;
+    }
 
-  //   let sql = fs.readFileSync(sqlFile, "utf-8");
+    let sql = fs.readFileSync(sqlFile, "utf-8");
 
-  //   // prisma_migrations 테이블 생성 구문 제거
-  //   sql = sql.replace(/CREATE TABLE "prisma_migrations"[\s\S]*?;\n\n/g, "");
+    // prisma_migrations 테이블 생성 구문 제거
+    sql = sql.replace(/CREATE TABLE "prisma_migrations"[\s\S]*?;\n\n/g, "");
 
-  //   // CREATE TABLE/INDEX → IF NOT EXISTS 변환
-  //   sql = sql.replace(/CREATE TABLE "([^"]+)"/g, 'CREATE TABLE IF NOT EXISTS "$1"');
-  //   sql = sql.replace(/CREATE INDEX "([^"]+)" ON "([^"]+)"/g, 'CREATE INDEX IF NOT EXISTS "$1" ON "$2"');
-  //   sql = sql.replace(/CREATE UNIQUE INDEX "([^"]+)" ON "([^"]+)"/g, 'CREATE UNIQUE INDEX IF NOT EXISTS "$1" ON "$2"');
+    // CREATE TABLE/INDEX → IF NOT EXISTS 변환
+    sql = sql.replace(/CREATE TABLE "([^"]+)"/g, 'CREATE TABLE IF NOT EXISTS "$1"');
+    sql = sql.replace(/CREATE INDEX "([^"]+)" ON "([^"]+)"/g, 'CREATE INDEX IF NOT EXISTS "$1" ON "$2"');
+    sql = sql.replace(/CREATE UNIQUE INDEX "([^"]+)" ON "([^"]+)"/g, 'CREATE UNIQUE INDEX IF NOT EXISTS "$1" ON "$2"');
 
-  //   try {
-  //     runWranglerQuery(sql);
-  //     markMigrationAsApplied(migration);
-  //     console.log(`[migration] Applied: ${migration}`);
-  //   } catch (err) {
-  //     console.error(`[migration] Failed: ${migration}`, err.message);
-  //     throw err;
-  //   }
-  // }
+    try {
+      runWranglerQuery(sql);
+      markMigrationAsApplied(migration);
+      console.log(`[migration] Applied: ${migration}`);
+    } catch (err) {
+      console.error(`[migration] Failed: ${migration}`, err.message);
+      throw err;
+    }
+  }
 
-  // console.log("[migration] All migrations applied successfully.");
+  console.log("[migration] All migrations applied successfully.");
 }
 
 runMigrations();
