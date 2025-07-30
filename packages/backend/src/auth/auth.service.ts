@@ -4,6 +4,7 @@ import { Context } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { createPublicClient, http } from 'viem';
 import { mainnet } from 'viem/chains';
+import { createPrismaClient } from "../lib/prisma";
 import { generateAccessToken } from "../lib/utils/generateAccessToken";
 import { LoginDTO, LoginResponse } from "./types";
 
@@ -11,6 +12,7 @@ import { LoginDTO, LoginResponse } from "./types";
 
 export const AuthService = {
   async generateNonce(c : Context, walletAddress : string): Promise<{nonce : string}> {
+    const prisma = createPrismaClient(c.env.DB);
     const nonce = crypto.randomUUID();
 
     await c.env.DB.prepare('INSERT INTO nonce (nonce, address) VALUES (?, ?)').bind(nonce, walletAddress).run();
@@ -25,6 +27,7 @@ export const AuthService = {
    * 로그인 처리 및 시그니처 검증
    */
   async login(c : Context, loginDto: LoginDTO): Promise<LoginResponse> {
+    const prisma = createPrismaClient(c.env.DB);
     const { nonce, signature, address } = loginDto;
 
     try {

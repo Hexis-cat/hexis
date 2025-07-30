@@ -1,88 +1,19 @@
 # Hexis.cat Backend
 
-> **Serverless Backend for Encrypted Publishing**
 
-The backend service for Hexis.cat, built on Cloudflare Workers to provide a secure, scalable, and privacy-focused infrastructure for encrypted message publishing.
+## How to Develop with Database
 
-## 🎯 Service Overview
+1. fix ./prisma/schema.prisma
+2. run `pnpm db:migrate`
+3. run `pnpm dev` -> 개발 및 테스트
 
-The backend provides:
-- **API endpoints** for message publishing and retrieval
-- **Access control** for encrypted content
-- **Payment processing** integration
-- **Rate limiting** and security measures
+### Warning
+dev.db 은 절대 건들지 말것. 이 파일은 로컬과 프로덕션 DB 의 스키마를 동기화하는 용도로 사용되며, 로컬에서 마이그레이션을 진행할 때 사용된다.
 
-## 🏗️ Project Structure
+## How to Deploy
 
-```
-backend/
-├── src/
-│   ├── index.ts        # Application entry point
-│   ├── routes/         # API route definitions
-│   └── services/       # Business logic services
-├── wrangler.jsonc      # Cloudflare Workers configuration
-└── tsconfig.json      # TypeScript configuration
-```
+1. run `pnpm db:migrate:prod` in local
+2. git push
 
-### Tech Stack
 
-**Backend**
-- Cloudflare Workers
-- Hono (Web Framework)
-- TypeScript
 
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 18+
-- pnpm 10.7.0+
-
-### Installation & Development
-
-```bash
-# Install dependencies
-pnpm install
-
-# Setup local environment
-cp .env.example .dev.vars
-# .dev.vars 파일을 편집하여 필요한 환경 변수 설정
-
-# Start development server
-pnpm dev
-
-# Deploy to production
-pnpm deploy
-```
-
-## 📋 Development Status
-
-The backend is currently in development:
-- ✅ Basic project structure
-- ✅ Development environment setup
-- ✅ API framework integration
-- 🔄 Core features implementation in progress
-
-## 🎨 Core Features (Planned)
-
-- [ ] Message encryption/decryption endpoints
-- [ ] Access control system
-- [ ] Payment processing integration
-- [ ] Rate limiting and security
-- [ ] Analytics and monitoring
-- [ ] Caching layer
-
-## 🔐 Security & Privacy
-
-- Serverless architecture
-- No data persistence
-- Rate limiting protection
-- CORS configuration
-- Request validation
-
-## 📄 License
-
-ISC License
-
----
-
-**🜍 hexis.cat** — Publish what matters, hide what must.

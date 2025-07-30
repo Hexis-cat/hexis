@@ -14,10 +14,20 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model prisma_migrations
+ * 
+ */
+export type prisma_migrations = $Result.DefaultSelection<Prisma.$prisma_migrationsPayload>
+/**
  * Model User
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Nonce
+ * 
+ */
+export type Nonce = $Result.DefaultSelection<Prisma.$NoncePayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -26,8 +36,8 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Prisma_migrations
+ * const prisma_migrations = await prisma.prisma_migrations.findMany()
  * ```
  *
  *
@@ -47,8 +57,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Users
-   * const users = await prisma.user.findMany()
+   * // Fetch zero or more Prisma_migrations
+   * const prisma_migrations = await prisma.prisma_migrations.findMany()
    * ```
    *
    *
@@ -145,6 +155,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.prisma_migrations`: Exposes CRUD operations for the **prisma_migrations** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Prisma_migrations
+    * const prisma_migrations = await prisma.prisma_migrations.findMany()
+    * ```
+    */
+  get prisma_migrations(): Prisma.prisma_migrationsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.user`: Exposes CRUD operations for the **User** model.
     * Example usage:
     * ```ts
@@ -153,6 +173,16 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.nonce`: Exposes CRUD operations for the **Nonce** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Nonces
+    * const nonces = await prisma.nonce.findMany()
+    * ```
+    */
+  get nonce(): Prisma.NonceDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -593,7 +623,9 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    prisma_migrations: 'prisma_migrations',
+    User: 'User',
+    Nonce: 'Nonce'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -612,10 +644,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "prisma_migrations" | "user" | "nonce"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      prisma_migrations: {
+        payload: Prisma.$prisma_migrationsPayload<ExtArgs>
+        fields: Prisma.prisma_migrationsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.prisma_migrationsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.prisma_migrationsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>
+          }
+          findFirst: {
+            args: Prisma.prisma_migrationsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.prisma_migrationsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>
+          }
+          findMany: {
+            args: Prisma.prisma_migrationsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>[]
+          }
+          create: {
+            args: Prisma.prisma_migrationsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>
+          }
+          createMany: {
+            args: Prisma.prisma_migrationsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.prisma_migrationsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>[]
+          }
+          delete: {
+            args: Prisma.prisma_migrationsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>
+          }
+          update: {
+            args: Prisma.prisma_migrationsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>
+          }
+          deleteMany: {
+            args: Prisma.prisma_migrationsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.prisma_migrationsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.prisma_migrationsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>[]
+          }
+          upsert: {
+            args: Prisma.prisma_migrationsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$prisma_migrationsPayload>
+          }
+          aggregate: {
+            args: Prisma.Prisma_migrationsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePrisma_migrations>
+          }
+          groupBy: {
+            args: Prisma.prisma_migrationsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Prisma_migrationsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.prisma_migrationsCountArgs<ExtArgs>
+            result: $Utils.Optional<Prisma_migrationsCountAggregateOutputType> | number
+          }
+        }
+      }
       User: {
         payload: Prisma.$UserPayload<ExtArgs>
         fields: Prisma.UserFieldRefs
@@ -687,6 +793,80 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Nonce: {
+        payload: Prisma.$NoncePayload<ExtArgs>
+        fields: Prisma.NonceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.NonceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.NonceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>
+          }
+          findFirst: {
+            args: Prisma.NonceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.NonceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>
+          }
+          findMany: {
+            args: Prisma.NonceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>[]
+          }
+          create: {
+            args: Prisma.NonceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>
+          }
+          createMany: {
+            args: Prisma.NonceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.NonceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>[]
+          }
+          delete: {
+            args: Prisma.NonceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>
+          }
+          update: {
+            args: Prisma.NonceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>
+          }
+          deleteMany: {
+            args: Prisma.NonceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.NonceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.NonceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>[]
+          }
+          upsert: {
+            args: Prisma.NonceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$NoncePayload>
+          }
+          aggregate: {
+            args: Prisma.NonceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateNonce>
+          }
+          groupBy: {
+            args: Prisma.NonceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<NonceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.NonceCountArgs<ExtArgs>
+            result: $Utils.Optional<NonceCountAggregateOutputType> | number
           }
         }
       }
@@ -778,7 +958,9 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    prisma_migrations?: prisma_migrationsOmit
     user?: UserOmit
+    nonce?: NonceOmit
   }
 
   /* Types for Logging */
@@ -874,69 +1056,1024 @@ export namespace Prisma {
    */
 
   /**
+   * Model prisma_migrations
+   */
+
+  export type AggregatePrisma_migrations = {
+    _count: Prisma_migrationsCountAggregateOutputType | null
+    _min: Prisma_migrationsMinAggregateOutputType | null
+    _max: Prisma_migrationsMaxAggregateOutputType | null
+  }
+
+  export type Prisma_migrationsMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    registeredAt: Date | null
+  }
+
+  export type Prisma_migrationsMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    registeredAt: Date | null
+  }
+
+  export type Prisma_migrationsCountAggregateOutputType = {
+    id: number
+    name: number
+    registeredAt: number
+    _all: number
+  }
+
+
+  export type Prisma_migrationsMinAggregateInputType = {
+    id?: true
+    name?: true
+    registeredAt?: true
+  }
+
+  export type Prisma_migrationsMaxAggregateInputType = {
+    id?: true
+    name?: true
+    registeredAt?: true
+  }
+
+  export type Prisma_migrationsCountAggregateInputType = {
+    id?: true
+    name?: true
+    registeredAt?: true
+    _all?: true
+  }
+
+  export type Prisma_migrationsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which prisma_migrations to aggregate.
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of prisma_migrations to fetch.
+     */
+    orderBy?: prisma_migrationsOrderByWithRelationInput | prisma_migrationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: prisma_migrationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` prisma_migrations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` prisma_migrations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned prisma_migrations
+    **/
+    _count?: true | Prisma_migrationsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Prisma_migrationsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Prisma_migrationsMaxAggregateInputType
+  }
+
+  export type GetPrisma_migrationsAggregateType<T extends Prisma_migrationsAggregateArgs> = {
+        [P in keyof T & keyof AggregatePrisma_migrations]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePrisma_migrations[P]>
+      : GetScalarType<T[P], AggregatePrisma_migrations[P]>
+  }
+
+
+
+
+  export type prisma_migrationsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: prisma_migrationsWhereInput
+    orderBy?: prisma_migrationsOrderByWithAggregationInput | prisma_migrationsOrderByWithAggregationInput[]
+    by: Prisma_migrationsScalarFieldEnum[] | Prisma_migrationsScalarFieldEnum
+    having?: prisma_migrationsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Prisma_migrationsCountAggregateInputType | true
+    _min?: Prisma_migrationsMinAggregateInputType
+    _max?: Prisma_migrationsMaxAggregateInputType
+  }
+
+  export type Prisma_migrationsGroupByOutputType = {
+    id: string
+    name: string
+    registeredAt: Date
+    _count: Prisma_migrationsCountAggregateOutputType | null
+    _min: Prisma_migrationsMinAggregateOutputType | null
+    _max: Prisma_migrationsMaxAggregateOutputType | null
+  }
+
+  type GetPrisma_migrationsGroupByPayload<T extends prisma_migrationsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Prisma_migrationsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Prisma_migrationsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Prisma_migrationsGroupByOutputType[P]>
+            : GetScalarType<T[P], Prisma_migrationsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type prisma_migrationsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    registeredAt?: boolean
+  }, ExtArgs["result"]["prisma_migrations"]>
+
+  export type prisma_migrationsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    registeredAt?: boolean
+  }, ExtArgs["result"]["prisma_migrations"]>
+
+  export type prisma_migrationsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    registeredAt?: boolean
+  }, ExtArgs["result"]["prisma_migrations"]>
+
+  export type prisma_migrationsSelectScalar = {
+    id?: boolean
+    name?: boolean
+    registeredAt?: boolean
+  }
+
+  export type prisma_migrationsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "registeredAt", ExtArgs["result"]["prisma_migrations"]>
+
+  export type $prisma_migrationsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "prisma_migrations"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      registeredAt: Date
+    }, ExtArgs["result"]["prisma_migrations"]>
+    composites: {}
+  }
+
+  type prisma_migrationsGetPayload<S extends boolean | null | undefined | prisma_migrationsDefaultArgs> = $Result.GetResult<Prisma.$prisma_migrationsPayload, S>
+
+  type prisma_migrationsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<prisma_migrationsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Prisma_migrationsCountAggregateInputType | true
+    }
+
+  export interface prisma_migrationsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['prisma_migrations'], meta: { name: 'prisma_migrations' } }
+    /**
+     * Find zero or one Prisma_migrations that matches the filter.
+     * @param {prisma_migrationsFindUniqueArgs} args - Arguments to find a Prisma_migrations
+     * @example
+     * // Get one Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends prisma_migrationsFindUniqueArgs>(args: SelectSubset<T, prisma_migrationsFindUniqueArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Prisma_migrations that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {prisma_migrationsFindUniqueOrThrowArgs} args - Arguments to find a Prisma_migrations
+     * @example
+     * // Get one Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends prisma_migrationsFindUniqueOrThrowArgs>(args: SelectSubset<T, prisma_migrationsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Prisma_migrations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {prisma_migrationsFindFirstArgs} args - Arguments to find a Prisma_migrations
+     * @example
+     * // Get one Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends prisma_migrationsFindFirstArgs>(args?: SelectSubset<T, prisma_migrationsFindFirstArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Prisma_migrations that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {prisma_migrationsFindFirstOrThrowArgs} args - Arguments to find a Prisma_migrations
+     * @example
+     * // Get one Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends prisma_migrationsFindFirstOrThrowArgs>(args?: SelectSubset<T, prisma_migrationsFindFirstOrThrowArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Prisma_migrations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {prisma_migrationsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.findMany()
+     * 
+     * // Get first 10 Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const prisma_migrationsWithIdOnly = await prisma.prisma_migrations.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends prisma_migrationsFindManyArgs>(args?: SelectSubset<T, prisma_migrationsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Prisma_migrations.
+     * @param {prisma_migrationsCreateArgs} args - Arguments to create a Prisma_migrations.
+     * @example
+     * // Create one Prisma_migrations
+     * const Prisma_migrations = await prisma.prisma_migrations.create({
+     *   data: {
+     *     // ... data to create a Prisma_migrations
+     *   }
+     * })
+     * 
+     */
+    create<T extends prisma_migrationsCreateArgs>(args: SelectSubset<T, prisma_migrationsCreateArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Prisma_migrations.
+     * @param {prisma_migrationsCreateManyArgs} args - Arguments to create many Prisma_migrations.
+     * @example
+     * // Create many Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends prisma_migrationsCreateManyArgs>(args?: SelectSubset<T, prisma_migrationsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Prisma_migrations and returns the data saved in the database.
+     * @param {prisma_migrationsCreateManyAndReturnArgs} args - Arguments to create many Prisma_migrations.
+     * @example
+     * // Create many Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Prisma_migrations and only return the `id`
+     * const prisma_migrationsWithIdOnly = await prisma.prisma_migrations.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends prisma_migrationsCreateManyAndReturnArgs>(args?: SelectSubset<T, prisma_migrationsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Prisma_migrations.
+     * @param {prisma_migrationsDeleteArgs} args - Arguments to delete one Prisma_migrations.
+     * @example
+     * // Delete one Prisma_migrations
+     * const Prisma_migrations = await prisma.prisma_migrations.delete({
+     *   where: {
+     *     // ... filter to delete one Prisma_migrations
+     *   }
+     * })
+     * 
+     */
+    delete<T extends prisma_migrationsDeleteArgs>(args: SelectSubset<T, prisma_migrationsDeleteArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Prisma_migrations.
+     * @param {prisma_migrationsUpdateArgs} args - Arguments to update one Prisma_migrations.
+     * @example
+     * // Update one Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends prisma_migrationsUpdateArgs>(args: SelectSubset<T, prisma_migrationsUpdateArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Prisma_migrations.
+     * @param {prisma_migrationsDeleteManyArgs} args - Arguments to filter Prisma_migrations to delete.
+     * @example
+     * // Delete a few Prisma_migrations
+     * const { count } = await prisma.prisma_migrations.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends prisma_migrationsDeleteManyArgs>(args?: SelectSubset<T, prisma_migrationsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Prisma_migrations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {prisma_migrationsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends prisma_migrationsUpdateManyArgs>(args: SelectSubset<T, prisma_migrationsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Prisma_migrations and returns the data updated in the database.
+     * @param {prisma_migrationsUpdateManyAndReturnArgs} args - Arguments to update many Prisma_migrations.
+     * @example
+     * // Update many Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Prisma_migrations and only return the `id`
+     * const prisma_migrationsWithIdOnly = await prisma.prisma_migrations.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends prisma_migrationsUpdateManyAndReturnArgs>(args: SelectSubset<T, prisma_migrationsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Prisma_migrations.
+     * @param {prisma_migrationsUpsertArgs} args - Arguments to update or create a Prisma_migrations.
+     * @example
+     * // Update or create a Prisma_migrations
+     * const prisma_migrations = await prisma.prisma_migrations.upsert({
+     *   create: {
+     *     // ... data to create a Prisma_migrations
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Prisma_migrations we want to update
+     *   }
+     * })
+     */
+    upsert<T extends prisma_migrationsUpsertArgs>(args: SelectSubset<T, prisma_migrationsUpsertArgs<ExtArgs>>): Prisma__prisma_migrationsClient<$Result.GetResult<Prisma.$prisma_migrationsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Prisma_migrations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {prisma_migrationsCountArgs} args - Arguments to filter Prisma_migrations to count.
+     * @example
+     * // Count the number of Prisma_migrations
+     * const count = await prisma.prisma_migrations.count({
+     *   where: {
+     *     // ... the filter for the Prisma_migrations we want to count
+     *   }
+     * })
+    **/
+    count<T extends prisma_migrationsCountArgs>(
+      args?: Subset<T, prisma_migrationsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Prisma_migrationsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Prisma_migrations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Prisma_migrationsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Prisma_migrationsAggregateArgs>(args: Subset<T, Prisma_migrationsAggregateArgs>): Prisma.PrismaPromise<GetPrisma_migrationsAggregateType<T>>
+
+    /**
+     * Group by Prisma_migrations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {prisma_migrationsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends prisma_migrationsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: prisma_migrationsGroupByArgs['orderBy'] }
+        : { orderBy?: prisma_migrationsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, prisma_migrationsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPrisma_migrationsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the prisma_migrations model
+   */
+  readonly fields: prisma_migrationsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for prisma_migrations.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__prisma_migrationsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the prisma_migrations model
+   */
+  interface prisma_migrationsFieldRefs {
+    readonly id: FieldRef<"prisma_migrations", 'String'>
+    readonly name: FieldRef<"prisma_migrations", 'String'>
+    readonly registeredAt: FieldRef<"prisma_migrations", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * prisma_migrations findUnique
+   */
+  export type prisma_migrationsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * Filter, which prisma_migrations to fetch.
+     */
+    where: prisma_migrationsWhereUniqueInput
+  }
+
+  /**
+   * prisma_migrations findUniqueOrThrow
+   */
+  export type prisma_migrationsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * Filter, which prisma_migrations to fetch.
+     */
+    where: prisma_migrationsWhereUniqueInput
+  }
+
+  /**
+   * prisma_migrations findFirst
+   */
+  export type prisma_migrationsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * Filter, which prisma_migrations to fetch.
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of prisma_migrations to fetch.
+     */
+    orderBy?: prisma_migrationsOrderByWithRelationInput | prisma_migrationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for prisma_migrations.
+     */
+    cursor?: prisma_migrationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` prisma_migrations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` prisma_migrations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of prisma_migrations.
+     */
+    distinct?: Prisma_migrationsScalarFieldEnum | Prisma_migrationsScalarFieldEnum[]
+  }
+
+  /**
+   * prisma_migrations findFirstOrThrow
+   */
+  export type prisma_migrationsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * Filter, which prisma_migrations to fetch.
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of prisma_migrations to fetch.
+     */
+    orderBy?: prisma_migrationsOrderByWithRelationInput | prisma_migrationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for prisma_migrations.
+     */
+    cursor?: prisma_migrationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` prisma_migrations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` prisma_migrations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of prisma_migrations.
+     */
+    distinct?: Prisma_migrationsScalarFieldEnum | Prisma_migrationsScalarFieldEnum[]
+  }
+
+  /**
+   * prisma_migrations findMany
+   */
+  export type prisma_migrationsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * Filter, which prisma_migrations to fetch.
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of prisma_migrations to fetch.
+     */
+    orderBy?: prisma_migrationsOrderByWithRelationInput | prisma_migrationsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing prisma_migrations.
+     */
+    cursor?: prisma_migrationsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` prisma_migrations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` prisma_migrations.
+     */
+    skip?: number
+    distinct?: Prisma_migrationsScalarFieldEnum | Prisma_migrationsScalarFieldEnum[]
+  }
+
+  /**
+   * prisma_migrations create
+   */
+  export type prisma_migrationsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * The data needed to create a prisma_migrations.
+     */
+    data: XOR<prisma_migrationsCreateInput, prisma_migrationsUncheckedCreateInput>
+  }
+
+  /**
+   * prisma_migrations createMany
+   */
+  export type prisma_migrationsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many prisma_migrations.
+     */
+    data: prisma_migrationsCreateManyInput | prisma_migrationsCreateManyInput[]
+  }
+
+  /**
+   * prisma_migrations createManyAndReturn
+   */
+  export type prisma_migrationsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * The data used to create many prisma_migrations.
+     */
+    data: prisma_migrationsCreateManyInput | prisma_migrationsCreateManyInput[]
+  }
+
+  /**
+   * prisma_migrations update
+   */
+  export type prisma_migrationsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * The data needed to update a prisma_migrations.
+     */
+    data: XOR<prisma_migrationsUpdateInput, prisma_migrationsUncheckedUpdateInput>
+    /**
+     * Choose, which prisma_migrations to update.
+     */
+    where: prisma_migrationsWhereUniqueInput
+  }
+
+  /**
+   * prisma_migrations updateMany
+   */
+  export type prisma_migrationsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update prisma_migrations.
+     */
+    data: XOR<prisma_migrationsUpdateManyMutationInput, prisma_migrationsUncheckedUpdateManyInput>
+    /**
+     * Filter which prisma_migrations to update
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * Limit how many prisma_migrations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * prisma_migrations updateManyAndReturn
+   */
+  export type prisma_migrationsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * The data used to update prisma_migrations.
+     */
+    data: XOR<prisma_migrationsUpdateManyMutationInput, prisma_migrationsUncheckedUpdateManyInput>
+    /**
+     * Filter which prisma_migrations to update
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * Limit how many prisma_migrations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * prisma_migrations upsert
+   */
+  export type prisma_migrationsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * The filter to search for the prisma_migrations to update in case it exists.
+     */
+    where: prisma_migrationsWhereUniqueInput
+    /**
+     * In case the prisma_migrations found by the `where` argument doesn't exist, create a new prisma_migrations with this data.
+     */
+    create: XOR<prisma_migrationsCreateInput, prisma_migrationsUncheckedCreateInput>
+    /**
+     * In case the prisma_migrations was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<prisma_migrationsUpdateInput, prisma_migrationsUncheckedUpdateInput>
+  }
+
+  /**
+   * prisma_migrations delete
+   */
+  export type prisma_migrationsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+    /**
+     * Filter which prisma_migrations to delete.
+     */
+    where: prisma_migrationsWhereUniqueInput
+  }
+
+  /**
+   * prisma_migrations deleteMany
+   */
+  export type prisma_migrationsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which prisma_migrations to delete
+     */
+    where?: prisma_migrationsWhereInput
+    /**
+     * Limit how many prisma_migrations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * prisma_migrations without action
+   */
+  export type prisma_migrationsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the prisma_migrations
+     */
+    select?: prisma_migrationsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the prisma_migrations
+     */
+    omit?: prisma_migrationsOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Model User
    */
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
-  export type UserAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type UserSumAggregateOutputType = {
-    id: number | null
-  }
-
   export type UserMinAggregateOutputType = {
-    id: number | null
-    email: string | null
-    name: string | null
+    id: string | null
+    address: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
-    id: number | null
-    email: string | null
-    name: string | null
+    id: string | null
+    address: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type UserCountAggregateOutputType = {
     id: number
-    email: number
-    name: number
+    address: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
-  export type UserAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type UserSumAggregateInputType = {
-    id?: true
-  }
-
   export type UserMinAggregateInputType = {
     id?: true
-    email?: true
-    name?: true
+    address?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserMaxAggregateInputType = {
     id?: true
-    email?: true
-    name?: true
+    address?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type UserCountAggregateInputType = {
     id?: true
-    email?: true
-    name?: true
+    address?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -978,18 +2115,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: UserAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: UserSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1020,19 +2145,16 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
-    _avg?: UserAvgAggregateInputType
-    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
 
   export type UserGroupByOutputType = {
-    id: number
-    email: string
-    name: string | null
+    id: string
+    address: string
+    createdAt: Date
+    updatedAt: Date
     _count: UserCountAggregateOutputType | null
-    _avg: UserAvgAggregateOutputType | null
-    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1053,37 +2175,42 @@ export namespace Prisma {
 
   export type UserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email?: boolean
-    name?: boolean
+    address?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email?: boolean
-    name?: boolean
+    address?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    email?: boolean
-    name?: boolean
+    address?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
-    email?: boolean
-    name?: boolean
+    address?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "address" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: number
-      email: string
-      name: string | null
+      id: string
+      address: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1507,9 +2634,10 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'Int'>
-    readonly email: FieldRef<"User", 'String'>
-    readonly name: FieldRef<"User", 'String'>
+    readonly id: FieldRef<"User", 'String'>
+    readonly address: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -1875,6 +3003,973 @@ export namespace Prisma {
 
 
   /**
+   * Model Nonce
+   */
+
+  export type AggregateNonce = {
+    _count: NonceCountAggregateOutputType | null
+    _min: NonceMinAggregateOutputType | null
+    _max: NonceMaxAggregateOutputType | null
+  }
+
+  export type NonceMinAggregateOutputType = {
+    id: string | null
+    address: string | null
+    createdAt: Date | null
+  }
+
+  export type NonceMaxAggregateOutputType = {
+    id: string | null
+    address: string | null
+    createdAt: Date | null
+  }
+
+  export type NonceCountAggregateOutputType = {
+    id: number
+    address: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type NonceMinAggregateInputType = {
+    id?: true
+    address?: true
+    createdAt?: true
+  }
+
+  export type NonceMaxAggregateInputType = {
+    id?: true
+    address?: true
+    createdAt?: true
+  }
+
+  export type NonceCountAggregateInputType = {
+    id?: true
+    address?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type NonceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Nonce to aggregate.
+     */
+    where?: NonceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nonces to fetch.
+     */
+    orderBy?: NonceOrderByWithRelationInput | NonceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: NonceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nonces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nonces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Nonces
+    **/
+    _count?: true | NonceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: NonceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: NonceMaxAggregateInputType
+  }
+
+  export type GetNonceAggregateType<T extends NonceAggregateArgs> = {
+        [P in keyof T & keyof AggregateNonce]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateNonce[P]>
+      : GetScalarType<T[P], AggregateNonce[P]>
+  }
+
+
+
+
+  export type NonceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: NonceWhereInput
+    orderBy?: NonceOrderByWithAggregationInput | NonceOrderByWithAggregationInput[]
+    by: NonceScalarFieldEnum[] | NonceScalarFieldEnum
+    having?: NonceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: NonceCountAggregateInputType | true
+    _min?: NonceMinAggregateInputType
+    _max?: NonceMaxAggregateInputType
+  }
+
+  export type NonceGroupByOutputType = {
+    id: string
+    address: string
+    createdAt: Date
+    _count: NonceCountAggregateOutputType | null
+    _min: NonceMinAggregateOutputType | null
+    _max: NonceMaxAggregateOutputType | null
+  }
+
+  type GetNonceGroupByPayload<T extends NonceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<NonceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof NonceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], NonceGroupByOutputType[P]>
+            : GetScalarType<T[P], NonceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type NonceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    address?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["nonce"]>
+
+  export type NonceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    address?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["nonce"]>
+
+  export type NonceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    address?: boolean
+    createdAt?: boolean
+  }, ExtArgs["result"]["nonce"]>
+
+  export type NonceSelectScalar = {
+    id?: boolean
+    address?: boolean
+    createdAt?: boolean
+  }
+
+  export type NonceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "address" | "createdAt", ExtArgs["result"]["nonce"]>
+
+  export type $NoncePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Nonce"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      address: string
+      createdAt: Date
+    }, ExtArgs["result"]["nonce"]>
+    composites: {}
+  }
+
+  type NonceGetPayload<S extends boolean | null | undefined | NonceDefaultArgs> = $Result.GetResult<Prisma.$NoncePayload, S>
+
+  type NonceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<NonceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: NonceCountAggregateInputType | true
+    }
+
+  export interface NonceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Nonce'], meta: { name: 'Nonce' } }
+    /**
+     * Find zero or one Nonce that matches the filter.
+     * @param {NonceFindUniqueArgs} args - Arguments to find a Nonce
+     * @example
+     * // Get one Nonce
+     * const nonce = await prisma.nonce.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends NonceFindUniqueArgs>(args: SelectSubset<T, NonceFindUniqueArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Nonce that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {NonceFindUniqueOrThrowArgs} args - Arguments to find a Nonce
+     * @example
+     * // Get one Nonce
+     * const nonce = await prisma.nonce.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends NonceFindUniqueOrThrowArgs>(args: SelectSubset<T, NonceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Nonce that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceFindFirstArgs} args - Arguments to find a Nonce
+     * @example
+     * // Get one Nonce
+     * const nonce = await prisma.nonce.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends NonceFindFirstArgs>(args?: SelectSubset<T, NonceFindFirstArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Nonce that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceFindFirstOrThrowArgs} args - Arguments to find a Nonce
+     * @example
+     * // Get one Nonce
+     * const nonce = await prisma.nonce.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends NonceFindFirstOrThrowArgs>(args?: SelectSubset<T, NonceFindFirstOrThrowArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Nonces that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Nonces
+     * const nonces = await prisma.nonce.findMany()
+     * 
+     * // Get first 10 Nonces
+     * const nonces = await prisma.nonce.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const nonceWithIdOnly = await prisma.nonce.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends NonceFindManyArgs>(args?: SelectSubset<T, NonceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Nonce.
+     * @param {NonceCreateArgs} args - Arguments to create a Nonce.
+     * @example
+     * // Create one Nonce
+     * const Nonce = await prisma.nonce.create({
+     *   data: {
+     *     // ... data to create a Nonce
+     *   }
+     * })
+     * 
+     */
+    create<T extends NonceCreateArgs>(args: SelectSubset<T, NonceCreateArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Nonces.
+     * @param {NonceCreateManyArgs} args - Arguments to create many Nonces.
+     * @example
+     * // Create many Nonces
+     * const nonce = await prisma.nonce.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends NonceCreateManyArgs>(args?: SelectSubset<T, NonceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Nonces and returns the data saved in the database.
+     * @param {NonceCreateManyAndReturnArgs} args - Arguments to create many Nonces.
+     * @example
+     * // Create many Nonces
+     * const nonce = await prisma.nonce.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Nonces and only return the `id`
+     * const nonceWithIdOnly = await prisma.nonce.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends NonceCreateManyAndReturnArgs>(args?: SelectSubset<T, NonceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Nonce.
+     * @param {NonceDeleteArgs} args - Arguments to delete one Nonce.
+     * @example
+     * // Delete one Nonce
+     * const Nonce = await prisma.nonce.delete({
+     *   where: {
+     *     // ... filter to delete one Nonce
+     *   }
+     * })
+     * 
+     */
+    delete<T extends NonceDeleteArgs>(args: SelectSubset<T, NonceDeleteArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Nonce.
+     * @param {NonceUpdateArgs} args - Arguments to update one Nonce.
+     * @example
+     * // Update one Nonce
+     * const nonce = await prisma.nonce.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends NonceUpdateArgs>(args: SelectSubset<T, NonceUpdateArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Nonces.
+     * @param {NonceDeleteManyArgs} args - Arguments to filter Nonces to delete.
+     * @example
+     * // Delete a few Nonces
+     * const { count } = await prisma.nonce.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends NonceDeleteManyArgs>(args?: SelectSubset<T, NonceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Nonces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Nonces
+     * const nonce = await prisma.nonce.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends NonceUpdateManyArgs>(args: SelectSubset<T, NonceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Nonces and returns the data updated in the database.
+     * @param {NonceUpdateManyAndReturnArgs} args - Arguments to update many Nonces.
+     * @example
+     * // Update many Nonces
+     * const nonce = await prisma.nonce.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Nonces and only return the `id`
+     * const nonceWithIdOnly = await prisma.nonce.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends NonceUpdateManyAndReturnArgs>(args: SelectSubset<T, NonceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Nonce.
+     * @param {NonceUpsertArgs} args - Arguments to update or create a Nonce.
+     * @example
+     * // Update or create a Nonce
+     * const nonce = await prisma.nonce.upsert({
+     *   create: {
+     *     // ... data to create a Nonce
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Nonce we want to update
+     *   }
+     * })
+     */
+    upsert<T extends NonceUpsertArgs>(args: SelectSubset<T, NonceUpsertArgs<ExtArgs>>): Prisma__NonceClient<$Result.GetResult<Prisma.$NoncePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Nonces.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceCountArgs} args - Arguments to filter Nonces to count.
+     * @example
+     * // Count the number of Nonces
+     * const count = await prisma.nonce.count({
+     *   where: {
+     *     // ... the filter for the Nonces we want to count
+     *   }
+     * })
+    **/
+    count<T extends NonceCountArgs>(
+      args?: Subset<T, NonceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], NonceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Nonce.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends NonceAggregateArgs>(args: Subset<T, NonceAggregateArgs>): Prisma.PrismaPromise<GetNonceAggregateType<T>>
+
+    /**
+     * Group by Nonce.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {NonceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends NonceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: NonceGroupByArgs['orderBy'] }
+        : { orderBy?: NonceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, NonceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNonceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Nonce model
+   */
+  readonly fields: NonceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Nonce.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__NonceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Nonce model
+   */
+  interface NonceFieldRefs {
+    readonly id: FieldRef<"Nonce", 'String'>
+    readonly address: FieldRef<"Nonce", 'String'>
+    readonly createdAt: FieldRef<"Nonce", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Nonce findUnique
+   */
+  export type NonceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * Filter, which Nonce to fetch.
+     */
+    where: NonceWhereUniqueInput
+  }
+
+  /**
+   * Nonce findUniqueOrThrow
+   */
+  export type NonceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * Filter, which Nonce to fetch.
+     */
+    where: NonceWhereUniqueInput
+  }
+
+  /**
+   * Nonce findFirst
+   */
+  export type NonceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * Filter, which Nonce to fetch.
+     */
+    where?: NonceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nonces to fetch.
+     */
+    orderBy?: NonceOrderByWithRelationInput | NonceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Nonces.
+     */
+    cursor?: NonceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nonces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nonces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nonces.
+     */
+    distinct?: NonceScalarFieldEnum | NonceScalarFieldEnum[]
+  }
+
+  /**
+   * Nonce findFirstOrThrow
+   */
+  export type NonceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * Filter, which Nonce to fetch.
+     */
+    where?: NonceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nonces to fetch.
+     */
+    orderBy?: NonceOrderByWithRelationInput | NonceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Nonces.
+     */
+    cursor?: NonceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nonces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nonces.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Nonces.
+     */
+    distinct?: NonceScalarFieldEnum | NonceScalarFieldEnum[]
+  }
+
+  /**
+   * Nonce findMany
+   */
+  export type NonceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * Filter, which Nonces to fetch.
+     */
+    where?: NonceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Nonces to fetch.
+     */
+    orderBy?: NonceOrderByWithRelationInput | NonceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Nonces.
+     */
+    cursor?: NonceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Nonces from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Nonces.
+     */
+    skip?: number
+    distinct?: NonceScalarFieldEnum | NonceScalarFieldEnum[]
+  }
+
+  /**
+   * Nonce create
+   */
+  export type NonceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Nonce.
+     */
+    data: XOR<NonceCreateInput, NonceUncheckedCreateInput>
+  }
+
+  /**
+   * Nonce createMany
+   */
+  export type NonceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Nonces.
+     */
+    data: NonceCreateManyInput | NonceCreateManyInput[]
+  }
+
+  /**
+   * Nonce createManyAndReturn
+   */
+  export type NonceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Nonces.
+     */
+    data: NonceCreateManyInput | NonceCreateManyInput[]
+  }
+
+  /**
+   * Nonce update
+   */
+  export type NonceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Nonce.
+     */
+    data: XOR<NonceUpdateInput, NonceUncheckedUpdateInput>
+    /**
+     * Choose, which Nonce to update.
+     */
+    where: NonceWhereUniqueInput
+  }
+
+  /**
+   * Nonce updateMany
+   */
+  export type NonceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Nonces.
+     */
+    data: XOR<NonceUpdateManyMutationInput, NonceUncheckedUpdateManyInput>
+    /**
+     * Filter which Nonces to update
+     */
+    where?: NonceWhereInput
+    /**
+     * Limit how many Nonces to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nonce updateManyAndReturn
+   */
+  export type NonceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * The data used to update Nonces.
+     */
+    data: XOR<NonceUpdateManyMutationInput, NonceUncheckedUpdateManyInput>
+    /**
+     * Filter which Nonces to update
+     */
+    where?: NonceWhereInput
+    /**
+     * Limit how many Nonces to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nonce upsert
+   */
+  export type NonceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Nonce to update in case it exists.
+     */
+    where: NonceWhereUniqueInput
+    /**
+     * In case the Nonce found by the `where` argument doesn't exist, create a new Nonce with this data.
+     */
+    create: XOR<NonceCreateInput, NonceUncheckedCreateInput>
+    /**
+     * In case the Nonce was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<NonceUpdateInput, NonceUncheckedUpdateInput>
+  }
+
+  /**
+   * Nonce delete
+   */
+  export type NonceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+    /**
+     * Filter which Nonce to delete.
+     */
+    where: NonceWhereUniqueInput
+  }
+
+  /**
+   * Nonce deleteMany
+   */
+  export type NonceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Nonces to delete
+     */
+    where?: NonceWhereInput
+    /**
+     * Limit how many Nonces to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Nonce without action
+   */
+  export type NonceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Nonce
+     */
+    select?: NonceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Nonce
+     */
+    omit?: NonceOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -1885,13 +3980,32 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const Prisma_migrationsScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    registeredAt: 'registeredAt'
+  };
+
+  export type Prisma_migrationsScalarFieldEnum = (typeof Prisma_migrationsScalarFieldEnum)[keyof typeof Prisma_migrationsScalarFieldEnum]
+
+
   export const UserScalarFieldEnum: {
     id: 'id',
-    email: 'email',
-    name: 'name'
+    address: 'address',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+  export const NonceScalarFieldEnum: {
+    id: 'id',
+    address: 'address',
+    createdAt: 'createdAt'
+  };
+
+  export type NonceScalarFieldEnum = (typeof NonceScalarFieldEnum)[keyof typeof NonceScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -1902,24 +4016,9 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   /**
    * Field references
    */
-
-
-  /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
 
 
   /**
@@ -1930,107 +4029,285 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'DateTime'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
     
   /**
    * Deep Input Types
    */
 
 
+  export type prisma_migrationsWhereInput = {
+    AND?: prisma_migrationsWhereInput | prisma_migrationsWhereInput[]
+    OR?: prisma_migrationsWhereInput[]
+    NOT?: prisma_migrationsWhereInput | prisma_migrationsWhereInput[]
+    id?: StringFilter<"prisma_migrations"> | string
+    name?: StringFilter<"prisma_migrations"> | string
+    registeredAt?: DateTimeFilter<"prisma_migrations"> | Date | string
+  }
+
+  export type prisma_migrationsOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    registeredAt?: SortOrder
+  }
+
+  export type prisma_migrationsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: prisma_migrationsWhereInput | prisma_migrationsWhereInput[]
+    OR?: prisma_migrationsWhereInput[]
+    NOT?: prisma_migrationsWhereInput | prisma_migrationsWhereInput[]
+    name?: StringFilter<"prisma_migrations"> | string
+    registeredAt?: DateTimeFilter<"prisma_migrations"> | Date | string
+  }, "id">
+
+  export type prisma_migrationsOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    registeredAt?: SortOrder
+    _count?: prisma_migrationsCountOrderByAggregateInput
+    _max?: prisma_migrationsMaxOrderByAggregateInput
+    _min?: prisma_migrationsMinOrderByAggregateInput
+  }
+
+  export type prisma_migrationsScalarWhereWithAggregatesInput = {
+    AND?: prisma_migrationsScalarWhereWithAggregatesInput | prisma_migrationsScalarWhereWithAggregatesInput[]
+    OR?: prisma_migrationsScalarWhereWithAggregatesInput[]
+    NOT?: prisma_migrationsScalarWhereWithAggregatesInput | prisma_migrationsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"prisma_migrations"> | string
+    name?: StringWithAggregatesFilter<"prisma_migrations"> | string
+    registeredAt?: DateTimeWithAggregatesFilter<"prisma_migrations"> | Date | string
+  }
+
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    id?: IntFilter<"User"> | number
-    email?: StringFilter<"User"> | string
-    name?: StringNullableFilter<"User"> | string | null
+    id?: StringFilter<"User"> | string
+    address?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
-    email?: SortOrder
-    name?: SortOrderInput | SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    email?: string
+    id?: string
+    address?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringNullableFilter<"User"> | string | null
-  }, "id" | "email">
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+  }, "id" | "address">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
-    email?: SortOrder
-    name?: SortOrderInput | SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
-    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
-    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"User"> | number
-    email?: StringWithAggregatesFilter<"User"> | string
-    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    id?: StringWithAggregatesFilter<"User"> | string
+    address?: StringWithAggregatesFilter<"User"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type NonceWhereInput = {
+    AND?: NonceWhereInput | NonceWhereInput[]
+    OR?: NonceWhereInput[]
+    NOT?: NonceWhereInput | NonceWhereInput[]
+    id?: StringFilter<"Nonce"> | string
+    address?: StringFilter<"Nonce"> | string
+    createdAt?: DateTimeFilter<"Nonce"> | Date | string
+  }
+
+  export type NonceOrderByWithRelationInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NonceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    id_address?: NonceIdAddressCompoundUniqueInput
+    AND?: NonceWhereInput | NonceWhereInput[]
+    OR?: NonceWhereInput[]
+    NOT?: NonceWhereInput | NonceWhereInput[]
+    address?: StringFilter<"Nonce"> | string
+    createdAt?: DateTimeFilter<"Nonce"> | Date | string
+  }, "id" | "id_address">
+
+  export type NonceOrderByWithAggregationInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+    _count?: NonceCountOrderByAggregateInput
+    _max?: NonceMaxOrderByAggregateInput
+    _min?: NonceMinOrderByAggregateInput
+  }
+
+  export type NonceScalarWhereWithAggregatesInput = {
+    AND?: NonceScalarWhereWithAggregatesInput | NonceScalarWhereWithAggregatesInput[]
+    OR?: NonceScalarWhereWithAggregatesInput[]
+    NOT?: NonceScalarWhereWithAggregatesInput | NonceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Nonce"> | string
+    address?: StringWithAggregatesFilter<"Nonce"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Nonce"> | Date | string
+  }
+
+  export type prisma_migrationsCreateInput = {
+    id?: string
+    name: string
+    registeredAt?: Date | string
+  }
+
+  export type prisma_migrationsUncheckedCreateInput = {
+    id?: string
+    name: string
+    registeredAt?: Date | string
+  }
+
+  export type prisma_migrationsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type prisma_migrationsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type prisma_migrationsCreateManyInput = {
+    id?: string
+    name: string
+    registeredAt?: Date | string
+  }
+
+  export type prisma_migrationsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type prisma_migrationsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    registeredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateInput = {
-    email: string
-    name?: string | null
+    id?: string
+    address: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUncheckedCreateInput = {
-    id?: number
-    email: string
-    name?: string | null
+    id?: string
+    address: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserCreateManyInput = {
-    id?: number
-    email: string
-    name?: string | null
+    id?: string
+    address: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    email?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type NonceCreateInput = {
+    id?: string
+    address: string
+    createdAt?: Date | string
+  }
+
+  export type NonceUncheckedCreateInput = {
+    id?: string
+    address: string
+    createdAt?: Date | string
+  }
+
+  export type NonceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NonceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NonceCreateManyInput = {
+    id?: string
+    address: string
+    createdAt?: Date | string
+  }
+
+  export type NonceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type NonceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -2047,65 +4324,33 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type UserCountOrderByAggregateInput = {
+  export type prisma_migrationsCountOrderByAggregateInput = {
     id?: SortOrder
-    email?: SortOrder
     name?: SortOrder
+    registeredAt?: SortOrder
   }
 
-  export type UserAvgOrderByAggregateInput = {
+  export type prisma_migrationsMaxOrderByAggregateInput = {
     id?: SortOrder
-  }
-
-  export type UserMaxOrderByAggregateInput = {
-    id?: SortOrder
-    email?: SortOrder
     name?: SortOrder
+    registeredAt?: SortOrder
   }
 
-  export type UserMinOrderByAggregateInput = {
+  export type prisma_migrationsMinOrderByAggregateInput = {
     id?: SortOrder
-    email?: SortOrder
     name?: SortOrder
-  }
-
-  export type UserSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    registeredAt?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2125,48 +4370,70 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type UserCountOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserMinOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type NonceIdAddressCompoundUniqueInput = {
+    id: string
+    address: string
+  }
+
+  export type NonceCountOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NonceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type NonceMinOrderByAggregateInput = {
+    id?: SortOrder
+    address?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -2183,45 +4450,15 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -2241,32 +4478,29 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
 
