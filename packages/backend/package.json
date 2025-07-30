@@ -8,7 +8,8 @@
     "cf-typegen": "wrangler types --env-interface CloudflareBindings",
     "db:gen": "prisma generate",
     "db:push": "prisma db push",
-    "db:migrate": "prisma migrate dev"
+    "db:migrate": "prisma migrate dev",
+    "db-remote:migration": "wrangler d1 execute hexis-db --remote --file="
   },
   "dependencies": {
     "@prisma/adapter-d1": "^6.12.0",
