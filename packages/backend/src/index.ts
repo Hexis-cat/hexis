@@ -26,12 +26,11 @@ app.use(logger());
 app.use("*", cors());
 
 app.get("/", async (c) => {
-  
   return c.json({ status : true });
 });
 
 app.get("/health", (c) => {
-  return c.json({ status: "ok" });
+  return c.json({ status: true });
 });
 
 app.route("/auth", AuthRouter);

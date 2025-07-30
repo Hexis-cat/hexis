@@ -8,14 +8,17 @@ import { createPrismaClient } from "../lib/prisma";
 import { generateAccessToken } from "../lib/utils/generateAccessToken";
 import { LoginDTO, LoginResponse } from "./types";
 
-
-
 export const AuthService = {
   async generateNonce(c : Context, walletAddress : string): Promise<{nonce : string}> {
     const prisma = createPrismaClient(c.env.DB);
     const nonce = crypto.randomUUID();
-
-    await c.env.DB.prepare('INSERT INTO nonce (nonce, address) VALUES (?, ?)').bind(nonce, walletAddress).run();
+    await prisma.nonce.create({
+      data: {
+        id: nonce,
+        address: walletAddress,
+        createdAt: new Date(),
+      }
+    })
 
     return {
       nonce
@@ -31,46 +34,56 @@ export const AuthService = {
     const { nonce, signature, address } = loginDto;
 
     try {
-
-      const existingNonce = await c.env.DB.prepare('SELECT * FROM nonce WHERE nonce = ? AND address = ?').bind(nonce, address).first();
+      const existingNonce = await prisma.nonce.findUnique({
+        where: {
+          id_address: {
+            id: nonce,
+            address: address,
+          }
+        }
+      })
+      
       if (!existingNonce) {
-        await c.env.DB.prepare('DELETE FROM nonce WHERE nonce = ? AND address = ?').bind(nonce, address).run();
         throw new HTTPException(HttpStatusCode.BadRequest, {
           message: "Nonce not found. Please try again.",
         });
       }
 
-      await c.env.DB.prepare('DELETE FROM nonce WHERE nonce = ? AND address = ?').bind(nonce, address).run();
-  
-      
-  
-      // 타임스탬프 검증 (5분 이내)
-      // UTC로 통일하여 비교
-      const timeDiff = dayjs.utc().diff(dayjs.utc(existingNonce.created_at), 'seconds');
-      console.log(timeDiff)
-      if (timeDiff > 300) { // 5분 = 300초
+      if(dayjs.utc(existingNonce.createdAt).add(5, 'minutes').isBefore(dayjs.utc())) {
         throw new HTTPException(HttpStatusCode.BadRequest, {
           message: "Nonce expired. Please try again.",
         });
       }
-  
+
+      await prisma.nonce.delete({
+        where: {
+          id_address: {
+            id: nonce,
+            address: address,
+          }
+        }
+      })
   
       const isSignatureValid = await this.verifySignature({address, nonce, signature});
       if (!isSignatureValid) {
-        console.group('Invalid signature')
-        console.log('address', address)
-        console.log('nonce', nonce)
-        console.log('signature', signature)
-        console.groupEnd()
         throw new HTTPException(HttpStatusCode.BadRequest, {
           message: "Invalid signature",
         });
       }
   
-      let user = await c.env.DB.prepare('SELECT * FROM user WHERE address = ?').bind(address).first();
+      let user = await prisma.user.findUnique({
+        where: {
+          address: address,
+        }
+      });
+
       if (!user) {
-        await c.env.DB.prepare('INSERT INTO user (id, address) VALUES (?, ?)').bind(crypto.randomUUID(), address).run();
-        user = await c.env.DB.prepare('SELECT * FROM user WHERE address = ?').bind(address).first();
+        user = await prisma.user.create({
+          data: {
+            id: crypto.randomUUID(),
+            address: address,
+          }
+        })
       }
   
       
@@ -78,7 +91,6 @@ export const AuthService = {
         user,
         token : generateAccessToken(address, c.env.ACCESS_TOKEN_SECRET, c.env.ACCESS_TOKEN_EXPIRES_IN),
       } 
-
     } catch(err) {
       console.error(err)
       throw err;

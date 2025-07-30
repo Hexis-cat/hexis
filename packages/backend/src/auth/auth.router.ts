@@ -14,7 +14,7 @@ AuthRouter.get("/nonce", async (c : Context) => {
     });
   }
 
-  const nonce = await AuthService.generateNonce(c, address);
+  const nonce = await AuthService.generateNonce(c, address.toLowerCase());
   return c.json(nonce);
 });
 
@@ -35,7 +35,7 @@ AuthRouter.post('/login', async (c : Context) => {
   const result = await AuthService.login(c, {
     nonce,
     signature,
-    address
+    address: address.toLowerCase()
   });
 
 

@@ -1,4 +1,4 @@
-import { User } from "../lib/schema";
+import { User } from "../generated/prisma";
 
 export type LoginDTO = {
   nonce: string;
@@ -7,6 +7,6 @@ export type LoginDTO = {
 };
 
 export type LoginResponse = {
-  user : User 
+  user : Partial<User>
   token : string;
 };
