@@ -3016,18 +3016,21 @@ export namespace Prisma {
     id: string | null
     address: string | null
     createdAt: Date | null
+    expiresAt: Date | null
   }
 
   export type NonceMaxAggregateOutputType = {
     id: string | null
     address: string | null
     createdAt: Date | null
+    expiresAt: Date | null
   }
 
   export type NonceCountAggregateOutputType = {
     id: number
     address: number
     createdAt: number
+    expiresAt: number
     _all: number
   }
 
@@ -3036,18 +3039,21 @@ export namespace Prisma {
     id?: true
     address?: true
     createdAt?: true
+    expiresAt?: true
   }
 
   export type NonceMaxAggregateInputType = {
     id?: true
     address?: true
     createdAt?: true
+    expiresAt?: true
   }
 
   export type NonceCountAggregateInputType = {
     id?: true
     address?: true
     createdAt?: true
+    expiresAt?: true
     _all?: true
   }
 
@@ -3127,6 +3133,7 @@ export namespace Prisma {
     id: string
     address: string
     createdAt: Date
+    expiresAt: Date
     _count: NonceCountAggregateOutputType | null
     _min: NonceMinAggregateOutputType | null
     _max: NonceMaxAggregateOutputType | null
@@ -3150,27 +3157,31 @@ export namespace Prisma {
     id?: boolean
     address?: boolean
     createdAt?: boolean
+    expiresAt?: boolean
   }, ExtArgs["result"]["nonce"]>
 
   export type NonceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     address?: boolean
     createdAt?: boolean
+    expiresAt?: boolean
   }, ExtArgs["result"]["nonce"]>
 
   export type NonceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     address?: boolean
     createdAt?: boolean
+    expiresAt?: boolean
   }, ExtArgs["result"]["nonce"]>
 
   export type NonceSelectScalar = {
     id?: boolean
     address?: boolean
     createdAt?: boolean
+    expiresAt?: boolean
   }
 
-  export type NonceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "address" | "createdAt", ExtArgs["result"]["nonce"]>
+  export type NonceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "address" | "createdAt" | "expiresAt", ExtArgs["result"]["nonce"]>
 
   export type $NoncePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Nonce"
@@ -3179,6 +3190,7 @@ export namespace Prisma {
       id: string
       address: string
       createdAt: Date
+      expiresAt: Date
     }, ExtArgs["result"]["nonce"]>
     composites: {}
   }
@@ -3605,6 +3617,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Nonce", 'String'>
     readonly address: FieldRef<"Nonce", 'String'>
     readonly createdAt: FieldRef<"Nonce", 'DateTime'>
+    readonly expiresAt: FieldRef<"Nonce", 'DateTime'>
   }
     
 
@@ -4002,7 +4015,8 @@ export namespace Prisma {
   export const NonceScalarFieldEnum: {
     id: 'id',
     address: 'address',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    expiresAt: 'expiresAt'
   };
 
   export type NonceScalarFieldEnum = (typeof NonceScalarFieldEnum)[keyof typeof NonceScalarFieldEnum]
@@ -4141,12 +4155,14 @@ export namespace Prisma {
     id?: StringFilter<"Nonce"> | string
     address?: StringFilter<"Nonce"> | string
     createdAt?: DateTimeFilter<"Nonce"> | Date | string
+    expiresAt?: DateTimeFilter<"Nonce"> | Date | string
   }
 
   export type NonceOrderByWithRelationInput = {
     id?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type NonceWhereUniqueInput = Prisma.AtLeast<{
@@ -4157,12 +4173,14 @@ export namespace Prisma {
     NOT?: NonceWhereInput | NonceWhereInput[]
     address?: StringFilter<"Nonce"> | string
     createdAt?: DateTimeFilter<"Nonce"> | Date | string
+    expiresAt?: DateTimeFilter<"Nonce"> | Date | string
   }, "id" | "id_address">
 
   export type NonceOrderByWithAggregationInput = {
     id?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
+    expiresAt?: SortOrder
     _count?: NonceCountOrderByAggregateInput
     _max?: NonceMaxOrderByAggregateInput
     _min?: NonceMinOrderByAggregateInput
@@ -4175,6 +4193,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Nonce"> | string
     address?: StringWithAggregatesFilter<"Nonce"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Nonce"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"Nonce"> | Date | string
   }
 
   export type prisma_migrationsCreateInput = {
@@ -4272,42 +4291,49 @@ export namespace Prisma {
     id?: string
     address: string
     createdAt?: Date | string
+    expiresAt?: Date | string
   }
 
   export type NonceUncheckedCreateInput = {
     id?: string
     address: string
     createdAt?: Date | string
+    expiresAt?: Date | string
   }
 
   export type NonceUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NonceUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NonceCreateManyInput = {
     id?: string
     address: string
     createdAt?: Date | string
+    expiresAt?: Date | string
   }
 
   export type NonceUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type NonceUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -4414,18 +4440,21 @@ export namespace Prisma {
     id?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type NonceMaxOrderByAggregateInput = {
     id?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type NonceMinOrderByAggregateInput = {
     id?: SortOrder
     address?: SortOrder
     createdAt?: SortOrder
+    expiresAt?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

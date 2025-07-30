@@ -26,6 +26,7 @@ model Nonce {
   id        String   @id @default(uuid())
   address   String
   createdAt DateTime @default(now())
+  expiresAt DateTime @default(now())
 
   @@unique([id, address])
   @@index([address])

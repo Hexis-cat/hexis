@@ -133,7 +133,8 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.NonceScalarFieldEnum = {
   id: 'id',
   address: 'address',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
 };
 
 exports.Prisma.SortOrder = {
