@@ -1,0 +1,2 @@
+ALTER TABLE "private_texts" ALTER COLUMN "id" SET DEFAULT '8f4441ec-723c-40ae-a652-46a7c61b9768';--> statement-breakpoint
+ALTER TABLE "users" ALTER COLUMN "id" SET DEFAULT 'c55106d9-0502-4eb1-b563-5a34a64d30df';
