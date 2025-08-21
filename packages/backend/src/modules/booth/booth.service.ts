@@ -178,4 +178,37 @@ export const BoothService = {
 
     return updatedBooth;
   },
+
+  async boothEndSale({
+    ownerAddress,
+    boothId,
+  }: {
+    ownerAddress: string;
+    boothId: string;
+  }) {
+    const booth = await db
+      .select()
+      .from(boothTable)
+      .where(eq(boothTable.id, boothId));
+
+    if (booth.length === 0) {
+      throw new HTTPException(HttpStatusCode.NotFound, {
+        message: 'Booth not found',
+      });
+    }
+
+    if (ownerAddress.toLowerCase() !== booth[0].owner.toLowerCase()) {
+      throw new HTTPException(HttpStatusCode.Forbidden, {
+        message: 'You are not the owner of the booth',
+      });
+    }
+
+    const updatedBooth = await db
+      .update(boothTable)
+      .set({ isSaleStarted: false })
+      .where(eq(boothTable.id, boothId))
+      .returning();
+
+    return updatedBooth;
+  },
 };

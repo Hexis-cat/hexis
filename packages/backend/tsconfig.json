@@ -11,7 +11,8 @@
       "@db/*": ["./db/*"],
       "@external/*": ["./src/external/*"],
       "@modules/*": ["./src/modules/*"],
-      "@commons/*": ["./src/commons/*"]
+      "@commons/*": ["./src/commons/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   }
 }

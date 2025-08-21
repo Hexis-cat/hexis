@@ -46,6 +46,9 @@ export type PatchBoothParamDTO = z.infer<
 >;
 
 export const PatchBoothDtoValidationScheme = z.object({
+  boothId: z.string().regex(/^0x[a-f0-9]+$/, {
+    message: 'boothId should be a string of hex characters',
+  }),
   previewText: z.string(),
 });
 

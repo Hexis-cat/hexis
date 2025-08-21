@@ -1,108 +1,94 @@
-import { validationMiddleware } from '@commons/middlewares/validate.middleware';
-import { Hono } from 'hono';
+import { trpcServer } from '@hono/trpc-server';
 import { BoothService } from './booth.service';
 import {
-  CreateBoothDTO,
   CreateBoothDtoValidationScheme,
-  GetBoothDTO,
   GetBoothDtoValidationScheme,
-  GetBoothPaginationDTO,
   GetBoothPaginationDtoValidationScheme,
-  PatchBoothDTO,
   PatchBoothDtoValidationScheme,
-  PatchBoothParamDTO,
   PatchBoothParamDtoValidationScheme,
 } from './dtos-req';
 
-import { jwtMiddleware } from '@commons/middlewares/auth.middleware';
-import { JwtPayload } from '@commons/types';
-import type { JwtVariables } from 'hono/jwt';
+import {
+  createJwtContext,
+  onError,
+  protectedProcedure,
+  publicProcedure,
+  router,
+} from '@lib/trpc/trpc';
+import { BoothSchema, GetBoothsResponseSchema } from './dto-res';
 
-export const BoothRouter = new Hono<{ Variables: JwtVariables }>();
+const BoothTrpcRouter = router({
+  getBooths: publicProcedure
+    .input(GetBoothPaginationDtoValidationScheme)
+    .output(GetBoothsResponseSchema)
+    .query(async ({ input }) => {
+      const { page, size } = input;
+      const { count, list } = await BoothService.getBooths(page, size);
+      return { count, list };
+    }),
+  getBooth: protectedProcedure
+    .input(GetBoothDtoValidationScheme)
+    .output(BoothSchema)
+    .query(async ({ input, ctx }) => {
+      const { boothId } = input;
+      const booth = await BoothService.getBooth(boothId);
+      return booth;
+    }),
+  createBooth: protectedProcedure
+    .input(CreateBoothDtoValidationScheme)
+    .output(BoothSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { user } = ctx;
+      const { id, fullText } = input;
+      const booth = await BoothService.createBooth({
+        id,
+        requestOwnerAddress: user.address,
+        fullText,
+      });
 
-// Get Booths End-point
-BoothRouter.get(
-  '/',
-  validationMiddleware(GetBoothPaginationDtoValidationScheme, 'query'),
-  async c => {
-    const data = c.req.query();
-    const { page, size } = data as unknown as GetBoothPaginationDTO;
+      return BoothSchema.parse(booth);
+    }),
+  patchBooth: protectedProcedure
+    .input(PatchBoothDtoValidationScheme)
+    .output(BoothSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { user } = ctx;
+      const { boothId, previewText } = input;
+      const updatedBooth = await BoothService.patchBooth({
+        boothId,
+        previewText,
+        ownerAddress: user.address,
+      });
+      return BoothSchema.parse(updatedBooth);
+    }),
+  boothStartSale: protectedProcedure
+    .input(PatchBoothParamDtoValidationScheme)
+    .output(BoothSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { user } = ctx;
+      const { boothId } = input;
+      const updatedBooth = await BoothService.boothStartSale({
+        boothId,
+        ownerAddress: user.address,
+      });
+      return BoothSchema.parse(updatedBooth);
+    }),
+  boothEndSale: protectedProcedure
+    .input(PatchBoothParamDtoValidationScheme)
+    .output(BoothSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { user } = ctx;
+      const { boothId } = input;
+      const updatedBooth = await BoothService.boothEndSale({
+        boothId,
+        ownerAddress: user.address,
+      });
+      return BoothSchema.parse(updatedBooth);
+    }),
+});
 
-    const { count, list } = await BoothService.getBooths(page, size);
-    return c.json({
-      count,
-      list,
-    });
-  }
-);
-
-// Get Booth End-point
-BoothRouter.get(
-  '/:boothId',
-  jwtMiddleware,
-  validationMiddleware(GetBoothDtoValidationScheme, 'param'),
-  async c => {
-    const { boothId } = c.req.valid('param') as GetBoothDTO;
-
-    const booth = await BoothService.getBooth(boothId);
-    return c.json(booth);
-  }
-);
-
-// Create Booth End-point
-BoothRouter.post(
-  '/',
-  jwtMiddleware,
-  validationMiddleware(CreateBoothDtoValidationScheme, 'json'),
-  async c => {
-    const payload = c.get('jwtPayload') as JwtPayload;
-    const { id, fullText } = c.req.valid('json') as CreateBoothDTO;
-
-    const booth = await BoothService.createBooth({
-      id,
-      requestOwnerAddress: payload.address,
-      fullText,
-    });
-
-    return c.json(booth);
-  }
-);
-
-// Patch Booth End-point
-BoothRouter.patch(
-  '/:boothId/preview-text',
-  jwtMiddleware,
-  validationMiddleware(PatchBoothParamDtoValidationScheme, 'param'),
-  validationMiddleware(PatchBoothDtoValidationScheme, 'json'),
-  async c => {
-    const payload = c.get('jwtPayload') as JwtPayload;
-    const { boothId } = c.req.valid('param') as PatchBoothParamDTO;
-    const { previewText } = c.req.valid('json') as PatchBoothDTO;
-
-    const updatedBooth = await BoothService.patchBooth({
-      boothId,
-      previewText,
-      ownerAddress: payload.address,
-    });
-
-    return c.json(updatedBooth);
-  }
-);
-
-// Patch Booth Start-Sale
-BoothRouter.patch(
-  '/:boothId/start-sale',
-  jwtMiddleware,
-  validationMiddleware(PatchBoothParamDtoValidationScheme, 'param'),
-  async c => {
-    const payload = c.get('jwtPayload') as JwtPayload;
-    const { boothId } = c.req.valid('param') as PatchBoothParamDTO;
-
-    const updatedBooth = await BoothService.boothStartSale({
-      boothId,
-      ownerAddress: payload.address,
-    });
-
-    return c.json(updatedBooth);
-  }
-);
+export const BoothTrpcServer = trpcServer({
+  router: BoothTrpcRouter,
+  createContext: createJwtContext,
+  onError: onError,
+});

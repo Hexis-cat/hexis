@@ -1,6 +1,14 @@
-import { User } from '@db/schema';
+import z from 'zod';
 
-export type LoginResponse = {
-  user: Partial<User>;
-  token: string;
-};
+export const NonceResponseSchema = z.object({
+  nonce: z.string(),
+});
+
+export const LoginResponseSchema = z.object({
+  user: z.object({
+    id: z.uuid(),
+    walletAddress: z.string(),
+    createdAt: z.date(),
+  }),
+  token: z.string(),
+});

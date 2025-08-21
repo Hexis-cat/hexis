@@ -1,42 +1,34 @@
-import { validationMiddleware } from '@commons/middlewares/validate.middleware';
-import { Hono } from 'hono';
+import { trpcServer } from '@hono/trpc-server';
+import { onError, publicProcedure, router } from '@lib/trpc/trpc';
 import { AuthService } from './auth.service';
-import {
-  GetNonceDTO,
-  LoginDtoValidationScheme,
-  NonceDtoValidationScheme,
-  PostLoginDTO,
-} from './dtos-req';
+import { LoginDtoValidationScheme, NonceDtoValidationScheme } from './dtos-req';
+import { LoginResponseSchema, NonceResponseSchema } from './dtos-res';
 
-export const AuthRouter = new Hono();
+const AuthTrpcRouter = router({
+  nonce: publicProcedure
+    .input(NonceDtoValidationScheme)
+    .output(NonceResponseSchema)
+    .query(async ({ input }) => {
+      const { address } = input;
+      const nonce = await AuthService.generateNonce(address.toLowerCase());
+      return nonce;
+    }),
+  login: publicProcedure
+    .input(LoginDtoValidationScheme)
+    .output(LoginResponseSchema)
+    .mutation(async ({ input }) => {
+      const { nonce, signature, address } = input;
+      const response = await AuthService.login({
+        nonce,
+        signature,
+        address: address.toLowerCase(),
+      });
 
-// Nonce Generation End-point
-AuthRouter.get(
-  '/nonce',
-  validationMiddleware(NonceDtoValidationScheme, 'query'),
-  async c => {
-    const data = c.req.valid('query');
-    const { address } = data as GetNonceDTO;
+      return response;
+    }),
+});
 
-    const nonce = await AuthService.generateNonce(address.toLowerCase());
-    return c.json(nonce);
-  }
-);
-
-// Login End-point
-AuthRouter.post(
-  '/login',
-  validationMiddleware(LoginDtoValidationScheme, 'json'),
-  async c => {
-    const data = c.req.valid('json');
-    const { nonce, signature, address } = data as PostLoginDTO;
-
-    const response = await AuthService.login({
-      nonce,
-      signature,
-      address: address.toLowerCase(),
-    });
-
-    return c.json(response);
-  }
-);
+export const AuthTrpcServer = trpcServer({
+  router: AuthTrpcRouter,
+  onError: onError,
+});
