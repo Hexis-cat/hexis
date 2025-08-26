@@ -1,7 +1,12 @@
 import { trpcServer } from '@hono/trpc-server';
-import { onError, publicProcedure, router } from '@lib/trpc/trpc';
-import { AuthTrpcServer } from '@modules/auth/auth.router';
-import { BoothTrpcServer } from '@modules/booth/booth.router';
+import {
+  onError,
+  router,
+  createJwtContext,
+  publicProcedure,
+} from './lib/trpc/trpc';
+import { AuthRouter } from './modules/auth/auth.router';
+import { BoothRouter } from './modules/booth/booth.router';
 import 'dotenv/config';
 import { Hono } from 'hono';
 import { cors } from 'hono/cors';
@@ -33,22 +38,24 @@ app.get('/health', c => {
   return c.json({ status: true });
 });
 
+const appRouter = router({
+  ping: publicProcedure.query(() => ({ status: true })),
+  auth: AuthRouter,
+  booth: BoothRouter,
+});
+
 app.use(
-  '/',
+  '/trpc/*',
   trpcServer({
-    router: router({
-      health: publicProcedure.query(() => {
-        return { status: true };
-      }),
-    }),
+    router: appRouter,
+    createContext: createJwtContext,
     onError: onError,
   })
 );
-
-app.use('/auth/*', AuthTrpcServer);
-app.use('/booths/*', BoothTrpcServer);
 
 export default {
   port: process.env.PORT || 8080,
   fetch: app.fetch,
 };
+
+export type AppRouter = typeof appRouter;

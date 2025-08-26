@@ -1,10 +1,9 @@
-import { trpcServer } from '@hono/trpc-server';
-import { onError, publicProcedure, router } from '@lib/trpc/trpc';
+import { publicProcedure, router } from '../../lib/trpc/trpc';
 import { AuthService } from './auth.service';
 import { LoginDtoValidationScheme, NonceDtoValidationScheme } from './dtos-req';
 import { LoginResponseSchema, NonceResponseSchema } from './dtos-res';
 
-const AuthTrpcRouter = router({
+export const AuthRouter = router({
   nonce: publicProcedure
     .input(NonceDtoValidationScheme)
     .output(NonceResponseSchema)
@@ -26,9 +25,4 @@ const AuthTrpcRouter = router({
 
       return response;
     }),
-});
-
-export const AuthTrpcServer = trpcServer({
-  router: AuthTrpcRouter,
-  onError: onError,
 });

@@ -86,7 +86,7 @@ export const AuthService = {
       }
 
       return {
-        user: user[0] as Partial<User>,
+        user: user[0],
         token: generateAccessToken(
           address,
           process.env.ACCESS_TOKEN_SECRET,

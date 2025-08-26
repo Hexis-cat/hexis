@@ -1,4 +1,3 @@
-import { trpcServer } from '@hono/trpc-server';
 import { BoothService } from './booth.service';
 import {
   CreateBoothDtoValidationScheme,
@@ -9,15 +8,13 @@ import {
 } from './dtos-req';
 
 import {
-  createJwtContext,
-  onError,
   protectedProcedure,
   publicProcedure,
   router,
-} from '@lib/trpc/trpc';
+} from '../../lib/trpc/trpc';
 import { BoothSchema, GetBoothsResponseSchema } from './dto-res';
 
-const BoothTrpcRouter = router({
+export const BoothRouter = router({
   getBooths: publicProcedure
     .input(GetBoothPaginationDtoValidationScheme)
     .output(GetBoothsResponseSchema)
@@ -85,10 +82,4 @@ const BoothTrpcRouter = router({
       });
       return BoothSchema.parse(updatedBooth);
     }),
-});
-
-export const BoothTrpcServer = trpcServer({
-  router: BoothTrpcRouter,
-  createContext: createJwtContext,
-  onError: onError,
 });

@@ -12,3 +12,6 @@ export const LoginResponseSchema = z.object({
   }),
   token: z.string(),
 });
+
+export type NonceResponse = z.infer<typeof NonceResponseSchema>;
+export type LoginResponse = z.infer<typeof LoginResponseSchema>;
