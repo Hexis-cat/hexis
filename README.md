@@ -1,4 +1,5 @@
-<img src="https://github.com/user-attachments/assets/f455f138-2c5a-42d3-874c-ecfaa0d3bd37" alt="HEXIS" width="64px" height="64px" />
+<img width="96" height="96" alt="Frame 105" src="https://github.com/user-attachments/assets/1ee8e75f-8195-476d-8289-8b384533e237" />
+
 
 # Hexis
 
