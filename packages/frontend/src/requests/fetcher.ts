@@ -1,6 +1,11 @@
 import { ClientError, NetworkError, ServerError } from '@/lib/error';
 import env from '@/lib/schema/env';
 
+/**
+ * Fetcher utility
+ * @description - This project mainly uses TRPC, but in case there are requests that are hard to handle with TRPC,
+ * this fetcher utility is provided to handle such requests.
+ */
 export async function fetcher<TData = unknown>({
   url,
   external = false,
